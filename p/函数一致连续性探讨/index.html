@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="简单探讨一些函数一致连续的定义，性质和证明方法">
+<title>函数一致连续性探讨</title>
+
+<link rel='canonical' href='https://Aimol-l.github.io/p/%E5%87%BD%E6%95%B0%E4%B8%80%E8%87%B4%E8%BF%9E%E7%BB%AD%E6%80%A7%E6%8E%A2%E8%AE%A8/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="函数一致连续性探讨">
+<meta property='og:description' content="简单探讨一些函数一致连续的定义，性质和证明方法">
+<meta property='og:url' content='https://Aimol-l.github.io/p/%E5%87%BD%E6%95%B0%E4%B8%80%E8%87%B4%E8%BF%9E%E7%BB%AD%E6%80%A7%E6%8E%A2%E8%AE%A8/'>
+<meta property='og:site_name' content='子菲鱼的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='数学分析' /><meta property='article:tag' content='连续性' /><meta property='article:published_time' content='2022-07-25T22:42:05&#43;08:00'/><meta property='article:modified_time' content='2022-07-25T22:42:05&#43;08:00'/>
+<meta name="twitter:title" content="函数一致连续性探讨">
+<meta name="twitter:description" content="简单探讨一些函数一致连续的定义，性质和证明方法">
+    <link rel="shortcut icon" href="/static/logo_whale.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu3984548086917514970.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">子菲鱼的博客</a></h1>
+            <h2 class="site-description">慢慢变化</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/Aimol-l'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://Aimol-l.github.io/" selected>中文</option>
+                                
+                                    <option value="https://Aimol-l.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/" >
+                数学分析
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%87%BD%E6%95%B0%E4%B8%80%E8%87%B4%E8%BF%9E%E7%BB%AD%E6%80%A7%E6%8E%A2%E8%AE%A8/">函数一致连续性探讨</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            简单探讨一些函数一致连续的定义，性质和证明方法
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jul 25, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>梗概：一致连续是函数f(x)在I上的更强的整体性质。</p>
+<h1 id="定义"><strong>定义</strong>
+</h1><p>设f(x)在区间I上有定义，若\(\forall \varepsilon &gt;0,\exists\delta=\delta(\varepsilon)&gt;0\),使得\(\forall x^{&rsquo;},x^{&rsquo;&rsquo;}\in I, 当|x^{&rsquo;}-x^{&rsquo;&rsquo;}|&lt;\delta ,有 |f(x^{&rsquo;})-f(x^{&rsquo;&rsquo;})|&lt;\varepsilon\)</p>
+<h1 id="判断一致连续"><strong>判断一致连续</strong>
+</h1><p>通常来说,判断函数一致连续的方式有这几种：</p>
+<ul>
+<li>康托-海恩定理。</li>
+<li>函数f(x)在I上连续且左右极限存在并有限。</li>
+<li>f(x)在无穷区间上的导函数有界。</li>
+<li>满足利普希茨条件。(这是比一致连续还要强的要求)</li>
+<li>非有界区间上定义的连续的周期函数是一致连续。</li>
+<li>紧集上定义的连续函数是一致连续的。</li>
+<li>利用一致连续的定义。</li>
+</ul>
+<h2 id="证明">证明
+</h2><p><strong>康托-海恩定理</strong>
+若函数f(x)在闭区间[a,b]上连续，则f(x)也在闭区间[a,b]上一致连续。</p>
+<blockquote>
+<p>反证法。假设该定理不成立，那么就有\(\exists\varepsilon_0 &gt;0\)以及区间[a,b]上的点列\({x_n}和{y_n},\)</p>
+<p>虽然\(\lim_{n \to \infty}(x_n-y_n)=0\),但是\(|f(x_n)-f(y_n)|\ge \varepsilon_0,n\in Z^+\)</p>
+<p>因为\({x_n}\)有界，那么根据致命密性定理可知,\({x_n}\)有一个收敛的子&gt;列\(\lim_{k\to\infty}x_{n_k}=x_0 ,\)</p>
+<p>从而\(\lim_{k\to\infty}y_{n_k}=\lim_{k\to\infty}[(y_{n_k}-x_{n_k})+x_{n_k}]=x_0\)</p>
+<p>又因为\(a\le x_{n_k}\le b \Longrightarrow a\le x_0\le b\),所以f(x)在点x_0连续，由归结原则可知,\(\varepsilon_0\le \lim_{k\to\infty}|f(x_{n_k})-f(y_{n_k})|=|f(x_0)-f(x_0)|=0\),与假设矛盾！</p>
+</blockquote>
+<p>致密性定理: 有界数列必有收敛子数列</p>
+<p>归结原则: 若\(x_n \ne x_0,\lim_{x\rightarrow x_0}f(x)=A\Leftrightarrow\forall x_n\rightarrow x_0(n\rightarrow \infty)恒有\lim_{n\rightarrow\infty}f(x_n)=A \)</p>
+<p><strong>定理：函数f(x)在I上连续且左右极限存在并有限,则f(x)是一致连续的。</strong></p>
+<ul>
+<li>当I是有界的开区间(a,b)时</li>
+</ul>
+<blockquote>
+<p>其等价命题是：{x_n}是柯西列的时候,{f(x_n)}也是柯西列。(根据一致连续的定义很容易得到这个)</p>
+<p><strong>充分性证明</strong></p>
+<p>\( 不妨取{x_n}\in (a,b)且x_n&lt; x_{n+1},{x_n}是一个柯西列。\)</p>
+<p>\( \because f(x)是一致收敛的。\)</p>
+<p>\( \therefore 根据一致收敛的定义,\forall \varepsilon &gt;0 , \exists x_n,x_m&gt;0,当|x_n-x_m|时,使得|f(x_m)-f(x_n)|&lt; \varepsilon。\)</p>
+<p>\( \therefore 显然f(x_n)满足柯西列定义。\)</p>
+<p><strong>必要性证明</strong></p>
+<p>反证法：假设f(x)不是一致连续的</p>
+<p>\(即,\exists \varepsilon_0 &gt;0时,当\lim_{n\to\infty}|x_n-y_n|=0 ({x_n},{y_n}是定义在(a,b)的数列) \)</p>
+<p>\(有\forall n\in N,|f(x_n)-f(y_n)| \ge \varepsilon_0成立。\)</p>
+<p>\(但是根据致密性定理可知,{x_n},{y_n}的子列{x_{n_i}},{y_{n_i}}是收敛的。\)</p>
+<p>\(将子列{x_{n_i}},{y_{n_i}}拼接为一个新数列{z_n},那么{z_n}是一个柯西列。\)</p>
+<p>\(\therefore \forall n,m\in N,|f(z_n)-f(z_m)| &lt; \varepsilon_0,这与假设不符！\)</p>
+<p>\(\therefore 得证f(x)是一致连续的。\)</p>
+</blockquote>
+<ul>
+<li>当I是无界开区间[a,infty)时</li>
+</ul>
+<blockquote>
+<p>\(\because \lim_{x\to\infty}f(x)=A \)</p>
+<p>\(\therefore \forall \varepsilon &gt; 0,\exists \delta (\varepsilon), \forall M&gt;0,当x&gt;M时,|f(x)-A|&lt; \frac{\varepsilon}{2} \)</p>
+<p>\( 于是,对\forall x,y&gt; M,有|f(x)-f(y)|&lt; \varepsilon\)</p>
+<p>\( \because f(x)在(M,\infty)是一致连续的。\)</p>
+<p>由康托-海恩定理可知,连续函数f(x)在[a,M]中是一致连续的,</p>
+<p>\( \therefore 对于一个给定\varepsilon ,都\exists \delta_1(\varepsilon) 使得\)</p>
+<p>\( \forall x,y \in [a,M],|x-y|&lt; \delta_1 时有,|f(x)-f(y)|&lt; \varepsilon \)</p>
+<p>\(局部的对于给定的\varepsilon ,以及f(M)的领域U(f(M),\varepsilon),存在一个\delta_2&gt; 0,使得f(U(M,\varepsilon_2))\subset U(f(M),\varepsilon)\)</p>
+<p>\(\therefore 当|x-y|&lt; \delta_2时,有x,y\in ：U(f(M),\delta_2),|f(x)-f(y)|&lt; \varepsilon \)</p>
+<p>\(取\delta=min(\delta_1,\delta_2),就有对\forall x,y\in R,满足|x-y|&lt;\delta ,必定有|f(x)-f(y)|&lt; \varepsilon \)</p>
+<p>综上所述,f(x)是在\( [x,+\infty )\)是一致连续的.</p>
+</blockquote>
+<p><strong>定理：f(x)在无穷区间I上的导函数有界,那么f(x)是一致连续的,但是逆命题不成立。</strong></p>
+<blockquote>
+<p>\( \because f^{&rsquo;}(x)在I上有界。\)</p>
+<p>\(\therefore \exists M \in R ,使得x\in I时,有f^{&rsquo;}\le M。再由微分中值定理可得：\)</p>
+<p>\( \forall x_1,x_2 \in I,有f(x_1)-f(x_2)=f^{&rsquo;}(x)(x_1-x_2)\le M(x_1-x_2)\)</p>
+<p>\(\therefore 显然f(x)在I上满足Lipschitz条件。\)即,f(x)是一致连续的。</p>
+</blockquote>
+<p><strong>定理：Lipschitz条件</strong></p>
+<blockquote>
+<p>\(\exists L&gt;0,使得|f(x)-f(y)|\le L|x-y|,那么f(x)满足Lipschitz条件。 \)</p>
+<p>这是比一致连续更强的光滑性条件,因此满足Lipschitz条件的f(x)必然是一致连续的。</p>
+<p>更方便的是,如果f(x)是可微函数,并且导数是有界的,那么这个函数是Lipschitz连续的。</p>
+</blockquote>
+<p><strong>定理：非有界区间I上定义的连续的周期函数是一致连续。</strong></p>
+<blockquote>
+<p>设函数f(x)的最小正周期是T。</p>
+<p>当n=1时,f(x)在[(n-1)T,nT]即[0,T]上是显然一致连续的(康托-海恩定理)。</p>
+<p>设当n=k时,f(x)在[(k-1)T,kT]一致连续,显然f(x)在这闭区间里一致连续。</p>
+<p>\( \therefore f(x)在所以周期内一致连续\)</p>
+<p>\(\because f(x)在I上是连续的,故f(x)在I上一致连续。\)</p>
+</blockquote>
+<p><strong>补充：：函数f(x)在(a,b)内一致连续,则f(x)在(a,b)连续,且\(\lim_{x\to a^+}f(x)和\lim_{x\to b^-}f(x)\)都是存在的</strong></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/">数学分析</a>
+        
+            <a href="/tags/%E8%BF%9E%E7%BB%AD%E6%80%A7/">连续性</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2024 子菲鱼
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.27.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

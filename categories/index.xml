@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Categories on 子菲鱼的博客</title>
+        <link>https://Aimol-l.github.io/categories/</link>
+        <description>Recent content in Categories on 子菲鱼的博客</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>子菲鱼</copyright>
+        <lastBuildDate>Mon, 25 Jul 2022 22:42:05 +0800</lastBuildDate><atom:link href="https://Aimol-l.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>数学分析</title>
+        <link>https://Aimol-l.github.io/categories/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/</link>
+        <pubDate>Mon, 25 Jul 2022 22:42:05 +0800</pubDate>
+        
+        <guid>https://Aimol-l.github.io/categories/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Linux</title>
+        <link>https://Aimol-l.github.io/categories/linux/</link>
+        <pubDate>Sun, 24 Jul 2022 15:34:12 +0800</pubDate>
+        
+        <guid>https://Aimol-l.github.io/categories/linux/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Test</title>
+        <link>https://Aimol-l.github.io/categories/test/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://Aimol-l.github.io/categories/test/</guid>
+        <description>&lt;img src="https://Aimol-l.github.io/categories/test/hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg" alt="Featured image of post Test" /&gt;</description>
+        </item>
+        
+    </channel>
+</rss>

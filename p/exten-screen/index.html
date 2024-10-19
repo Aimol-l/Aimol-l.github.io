@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文是利用Weylus和VNC方法，以达到将闲置平板作为第二屏幕的目的">
+<title>平板作为PC扩展屏幕的使用</title>
+
+<link rel='canonical' href='https://Aimol-l.github.io/p/exten-screen/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="平板作为PC扩展屏幕的使用">
+<meta property='og:description' content="本文是利用Weylus和VNC方法，以达到将闲置平板作为第二屏幕的目的">
+<meta property='og:url' content='https://Aimol-l.github.io/p/exten-screen/'>
+<meta property='og:site_name' content='子菲鱼的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Linux' /><meta property='article:tag' content='VNC' /><meta property='article:published_time' content='2022-07-24T15:34:12&#43;08:00'/><meta property='article:modified_time' content='2022-07-24T15:34:12&#43;08:00'/><meta property='og:image' content='https://Aimol-l.github.io/p/exten-screen/image.jpg' />
+<meta name="twitter:title" content="平板作为PC扩展屏幕的使用">
+<meta name="twitter:description" content="本文是利用Weylus和VNC方法，以达到将闲置平板作为第二屏幕的目的"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://Aimol-l.github.io/p/exten-screen/image.jpg' />
+    <link rel="shortcut icon" href="/static/logo_whale.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu3984548086917514970.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">子菲鱼的博客</a></h1>
+            <h2 class="site-description">慢慢变化</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/Aimol-l'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://Aimol-l.github.io/" selected>中文</option>
+                                
+                                    <option value="https://Aimol-l.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#一安装">一、<strong>安装</strong></a></li>
+    <li><a href="#二配置虚拟桌面">二、<strong>配置虚拟桌面</strong></a></li>
+    <li><a href="#三添加配置文件">三、<strong>添加配置文件</strong></a></li>
+    <li><a href="#四添加uinput用户组"><strong>四、添加uinput用户组</strong></a></li>
+    <li><a href="#五设置虚拟屏幕"><strong>五、设置虚拟屏幕</strong></a></li>
+    <li><a href="#六为虚拟屏幕设置分辨率"><strong>六、为虚拟屏幕设置分辨率</strong></a></li>
+    <li><a href="#七开始使用weylus"><strong>七、开始使用Weylus</strong></a></li>
+    <li><a href="#八缺点"><strong>八、缺点</strong></a></li>
+    <li><a href="#九降低延迟"><strong>九、降低延迟</strong></a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/exten-screen/">
+                <img src="/p/exten-screen/image_hu9248366383677804910.jpg"
+                        srcset="/p/exten-screen/image_hu9248366383677804910.jpg 800w, /p/exten-screen/image_hu17620128766576581079.jpg 1600w"
+                        width="800" 
+                        height="360" 
+                        loading="lazy"
+                        alt="Featured image of post 平板作为PC扩展屏幕的使用" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/linux/" >
+                Linux
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/exten-screen/">平板作为PC扩展屏幕的使用</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文是利用Weylus和VNC方法，以达到将闲置平板作为第二屏幕的目的
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jul 24, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>如果能将空闲的平板作为扩展屏幕，用来码字，看文档，那也不失为一种物尽其用！
+本文利用Weylus/VNC作为工具，将PC上虚拟出的桌面用局域网广播的方式投送到平板上。</p>
+<p><strong>注意</strong>这是在Arch Linux KDE下测试的结果，理论上也适用于其他Linux发行版。对Win/Mac估计也能使用，但是本文不做讨论。</p>
+<p>工具：Weylus</p>
+<p>项目地址：https://github.com/H-M-H/Weylus</p>
+<h2 id="一安装">一、<strong>安装</strong>
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">yay -S weylus
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="二配置虚拟桌面">二、<strong>配置虚拟桌面</strong>
+</h2><p>Weylus的根本原理是将虚拟桌面广播，然后被平板接收，因此需要先在PC上虚拟出一个用于扩展的桌面。可以利用Intel显卡的虚拟桌面功能实现这个效果。</p>
+<h2 id="三添加配置文件">三、<strong>添加配置文件</strong>
+</h2><p>你需要安装Intel驱动，然后创建/etc/X11/xorg.conf.d/20-intel.conf文件，“20”表示优先级别。
+如果配置文件不生效，请尝试修改优先级，数字越小表示优先级越大。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo pacman -S xf86-video-intel
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>20-intel.conf文件内写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">Section &#34;Device&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">Identifier &#34;你的intelGPU标识(通常是intelgpu0或者integrated)&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">Driver &#34;intel&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 添加两个虚拟设备/屏幕</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">Option &#34;VirtualHeads&#34; &#34;2&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 如果出现闪烁，下面这些可能帮助你</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># Option &#34;TripleBuffer&#34; &#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># Option &#34;TearFree&#34;     &#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># Option &#34;DRI&#34;          &#34;false&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">EndSection</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="四添加uinput用户组"><strong>四、添加uinput用户组</strong>
+</h2><p>Weylus利用这个用户组完成模拟输入事件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo groupadd -r uinput
+</span></span><span class="line"><span class="cl">sudo usermod -aG uinput <span class="nv">$USER</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;KERNEL==&#34;uinput&#34;, MODE=&#34;0660&#34;, GROUP=&#34;uinput&#34;, OPTIONS+=&#34;static_node=uinput&#34;&#39;</span> <span class="se">\ </span><span class="p">|</span> sudo tee /etc/udev/rules.d/60-weylus.rules
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="五设置虚拟屏幕"><strong>五、设置虚拟屏幕</strong>
+</h2><p>完成以上操作后，<strong>重启</strong>计算机。如果一切顺利的话，你使用xrandr命令会看见两个虚拟设备(VIRTUAL1和VIRTUAL2)：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">Screen 0: minimum <span class="m">8</span> x 8, current <span class="m">2720</span> x 1280, maximum <span class="m">32767</span> x <span class="m">32767</span>
+</span></span><span class="line"><span class="cl">eDP1 connected primary 1920x1080+0+100 <span class="o">(</span>normal left inverted right x axis y axis<span class="o">)</span> 340mm x 190mm
+</span></span><span class="line"><span class="cl">   1920x1080     60.03 +  59.93* 
+</span></span><span class="line"><span class="cl">   1680x1050     59.88  
+</span></span><span class="line"><span class="cl">   1400x1050     59.98  
+</span></span><span class="line"><span class="cl">   1600x900      60.00    59.95    59.82  
+</span></span><span class="line"><span class="cl">   1280x1024     60.02  
+</span></span><span class="line"><span class="cl">   1400x900      59.96    59.88  
+</span></span><span class="line"><span class="cl">   1280x960      60.00  
+</span></span><span class="line"><span class="cl">   1368x768      60.00    59.88    59.85  
+</span></span><span class="line"><span class="cl">   1280x800      59.81    59.91  
+</span></span><span class="line"><span class="cl">   1280x720      59.86    60.00    59.74  
+</span></span><span class="line"><span class="cl">   1024x768      60.00  
+</span></span><span class="line"><span class="cl">   1024x576      60.00    59.90    59.82  
+</span></span><span class="line"><span class="cl">   960x540       60.00    59.63    59.82  
+</span></span><span class="line"><span class="cl">   800x600       60.32    56.25  
+</span></span><span class="line"><span class="cl">   864x486       60.00    59.92    59.57  
+</span></span><span class="line"><span class="cl">   640x480       59.94  
+</span></span><span class="line"><span class="cl">   720x405       59.51    60.00    58.99  
+</span></span><span class="line"><span class="cl">   640x360       59.84    59.32    60.00  
+</span></span><span class="line"><span class="cl">HDMI1 disconnected <span class="o">(</span>normal left inverted right x axis y axis<span class="o">)</span>
+</span></span><span class="line"><span class="cl">VIRTUAL1 disconnected <span class="o">(</span>normal left inverted right x axis y axis<span class="o">)</span>
+</span></span><span class="line"><span class="cl">VIRTUAL2 disconnected <span class="o">(</span>normal left inverted right x axis y axis<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中eDP1是笔记本的屏幕，HDM1是外接的物理屏幕，VIRTUAL1/2是显卡虚拟出来的屏幕。</p>
+<h2 id="六为虚拟屏幕设置分辨率"><strong>六、为虚拟屏幕设置分辨率</strong>
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">gtf <span class="m">1280</span> <span class="m">800</span> <span class="m">60</span>
+</span></span><span class="line"><span class="cl">xrandr --newmode <span class="s2">&#34;1280x800_60.00&#34;</span>  83.46  <span class="m">1280</span> <span class="m">1344</span> <span class="m">1480</span> <span class="m">1680</span>  <span class="m">800</span> <span class="m">801</span> <span class="m">804</span> <span class="m">828</span>  -HSync +Vsync
+</span></span><span class="line"><span class="cl">xrandr --addmode VIRTUAL1 1280x800_60.00
+</span></span><span class="line"><span class="cl">xrandr --output VIRTUAL1 --mode 1280x800_60.00
+</span></span><span class="line"><span class="cl">xrandr
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中1280和800是虚拟屏幕的分辨率，你可以根据你的平板大小来调节这个分辨率。</p>
+<p>每次开机后都需要进行这个操作，因此可以将这几个命令写成shell脚本，加入开机任务中。这里不作讨论。</p>
+<p>图中的VIRTUAL1就是刚刚设置的，我又将他旋转了一下(分辨率设置操作前应该没有这个VIRTUAL1显示出来)</p>
+<h2 id="七开始使用weylus"><strong>七、开始使用Weylus</strong>
+</h2><p>打开Weylus,设置密码后在平板上用浏览器扫描二维码或者输入网址打开即可。</p>
+<img src="./Screenshot_20220724_163439.png" alt="Screenshot_20220724_163439" style="zoom:50%;" />
+<p>在浏览器打开的网页中，将捕获的设备更换为“Monitor：VIRTUAL1”。</p>
+<img src="./1658677036916.jpg" alt="1658677036916" style="zoom: 25%;" />
+<h2 id="八缺点"><strong>八、缺点</strong>
+</h2><p>因为是画面是通过网络传播，会经过一系列的编码和解码过程，难免出现延迟，因此这种方式只适合对延迟要求低的任务：码字，阅读pdf等。</p>
+<h2 id="九降低延迟"><strong>九、降低延迟</strong>
+</h2><p>如果要想降低些许延迟，可以用VNC代替Weylus，更换一个传输协议也是有效果的！！</p>
+<p>安装VNC。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo pacman -S x11vnc 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>设置VNC密码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">x11vnc -storepasswd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>获取内网地址，192.168.xxx.xxx就是你的本机内网地址。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ip a
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu <span class="m">65536</span> qdisc noqueue state UNKNOWN group default qlen <span class="m">1000</span>
+</span></span><span class="line"><span class="cl">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+</span></span><span class="line"><span class="cl">    inet 127.0.0.1/8 scope host lo
+</span></span><span class="line"><span class="cl">       valid_lft forever preferred_lft forever
+</span></span><span class="line"><span class="cl">    inet6 ::1/128 scope host 
+</span></span><span class="line"><span class="cl">       valid_lft forever preferred_lft forever
+</span></span><span class="line"><span class="cl">3: wlan0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu <span class="m">1500</span> qdisc noqueue state UP group default qlen <span class="m">1000</span>
+</span></span><span class="line"><span class="cl">    link/ether 0c:dd:24:1e:d4:99 brd ff:ff:ff:ff:ff:ff
+</span></span><span class="line"><span class="cl">    inet 192.168.139.152/24 brd 192.168.139.255 scope global dynamic noprefixroute wlan0
+</span></span><span class="line"><span class="cl">       valid_lft 2248sec preferred_lft 2248sec
+</span></span><span class="line"><span class="cl">    inet 192.168.139.153/24 brd 192.168.139.255 scope global secondary dynamic noprefixroute wlan0
+</span></span><span class="line"><span class="cl">       valid_lft 2254sec preferred_lft 1804sec
+</span></span><span class="line"><span class="cl">    inet6 fe80::e705:33d5:1bfd:c0ac/64 scope link noprefixroute 
+</span></span><span class="line"><span class="cl">       valid_lft forever preferred_lft forever
+</span></span><span class="line"><span class="cl">    inet6 fe80::3728:30f7:2ac9:7de6/64 scope link 
+</span></span><span class="line"><span class="cl">       valid_lft forever preferred_lft forever
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>利用VNC将虚拟桌面“VIRTUAL1”广播出去。其中5900是端口号，-wait 是捕获速度，-defer是广播速度，-sb 0 表示一直捕获。详细设置请查看：man x11vnc</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">x11vnc -rfbport 5900 -clip xinerama1 -wait 1 -defer 1 -nowf -sb 0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在平板上安装VNC，可以使用bVNC，VNC Viewer等软件。</p>
+<p>ip填PC的内网ip，端口是5900，密码是你刚刚设置的VNC密码。</p>
+<p>经过我的测试，VNC的延迟会比Weylus小一点点，当然，就一点点而已。：）</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/linux/">Linux</a>
+        
+            <a href="/tags/vnc/">VNC</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2024 子菲鱼
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.27.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

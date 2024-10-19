@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Tags on 子菲鱼的博客</title>
+        <link>https://Aimol-l.github.io/tags/</link>
+        <description>Recent content in Tags on 子菲鱼的博客</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>子菲鱼</copyright>
+        <lastBuildDate>Mon, 25 Jul 2022 22:42:05 +0800</lastBuildDate><atom:link href="https://Aimol-l.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>连续性</title>
+        <link>https://Aimol-l.github.io/tags/%E8%BF%9E%E7%BB%AD%E6%80%A7/</link>
+        <pubDate>Mon, 25 Jul 2022 22:42:05 +0800</pubDate>
+        
+        <guid>https://Aimol-l.github.io/tags/%E8%BF%9E%E7%BB%AD%E6%80%A7/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>数学分析</title>
+        <link>https://Aimol-l.github.io/tags/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/</link>
+        <pubDate>Mon, 25 Jul 2022 22:42:05 +0800</pubDate>
+        
+        <guid>https://Aimol-l.github.io/tags/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Linux</title>
+        <link>https://Aimol-l.github.io/tags/linux/</link>
+        <pubDate>Sun, 24 Jul 2022 15:34:12 +0800</pubDate>
+        
+        <guid>https://Aimol-l.github.io/tags/linux/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>VNC</title>
+        <link>https://Aimol-l.github.io/tags/vnc/</link>
+        <pubDate>Sun, 24 Jul 2022 15:34:12 +0800</pubDate>
+        
+        <guid>https://Aimol-l.github.io/tags/vnc/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>
